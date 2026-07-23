@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -47,8 +46,8 @@ import com.hbm.util.Tuple.Quartet;
 import com.hbm.world.gen.nbt.NBTStructure;
 import com.hbm.world.gen.nbt.SpawnCondition;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -58,6 +57,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -71,19 +71,21 @@ public final class ContentExporter {
 	public static ExportSummary export() throws IOException {
 		File outputDirectory = resolveOutputDirectory();
 		Files.createDirectories(outputDirectory.toPath());
+		ContentEnrichment enrichment = createEnrichment();
+		ServerVariantIndex serverVariants = collectServerVariants();
 
 		MainRegistry.logger.info("Starting WOC content inventory export to {}", outputDirectory.getAbsolutePath());
 
 		List<Report> reports = new ArrayList<Report>();
-		reports.add(exportItems());
-		reports.add(exportBlocks());
+		reports.add(exportItems(enrichment, serverVariants));
+		reports.add(exportBlocks(enrichment, serverVariants));
 		reports.add(exportEntities());
 		reports.add(exportCraftingRecipes());
 		reports.add(exportSmeltingRecipes());
 		reports.add(exportMachineRecipes());
-		reports.add(exportCreativeTabs());
+		reports.add(exportCreativeTabs(enrichment));
 		reports.add(exportWorldgenFeatures());
-		reports.add(exportStructureLoot());
+		reports.add(exportStructureLoot(enrichment));
 		reports.add(exportFluids());
 
 		List<ProfileEntry> profileEntries = new ArrayList<ProfileEntry>();
@@ -109,10 +111,15 @@ public final class ContentExporter {
 		ExportSummary summary = new ExportSummary(outputDirectory, counts);
 		MainRegistry.logger.info("WOC content inventory export complete: {} rows across {} reports in {}",
 				summary.getTotalRows(), counts.size(), outputDirectory.getAbsolutePath());
+		String enrichmentSummary = enrichment.getSummary();
+		if(!enrichmentSummary.isEmpty()) {
+			MainRegistry.logger.info("WOC content export enrichment summary: {}", enrichmentSummary);
+		}
 		return summary;
 	}
 
-	private static Report exportItems() {
+	private static Report exportItems(ContentEnrichment enrichment,
+			ServerVariantIndex serverVariants) {
 		Report report = new Report(
 				"items.csv",
 				"ITEM",
@@ -125,18 +132,20 @@ public final class ContentExporter {
 			String registryName = registryName(item);
 			if(!isHbmRegistryName(registryName)) continue;
 
-			for(ItemStack stack : enumerateItemVariants(item)) {
+			for(ItemStack stack : enumerateItemVariants(item, enrichment, serverVariants)) {
 				int metadata = stack.getItemDamage();
 				String contentKey = "item:" + registryName + "#" + metadata;
 				report.add(contentKey, registryName, Integer.toString(metadata), item.getClass().getName(),
-						safeUnlocalizedName(stack), safeDisplayName(stack), creativeTabLabel(item.getCreativeTab()),
+						safeUnlocalizedName(stack), enrichment.getItemDisplayName(stack),
+						enrichment.getItemCreativeTabLabel(item),
 						sourceCategory(item.getClass()), inferredFamily(registryName));
 			}
 		}
 		return report;
 	}
 
-	private static Report exportBlocks() {
+	private static Report exportBlocks(ContentEnrichment enrichment,
+			ServerVariantIndex serverVariants) {
 		Report report = new Report(
 				"blocks.csv",
 				"BLOCK",
@@ -152,21 +161,21 @@ public final class ContentExporter {
 			Item item = Item.getItemFromBlock(block);
 			List<ItemStack> variants = item == null
 					? Collections.<ItemStack>emptyList()
-					: enumerateItemVariants(item);
+					: enumerateItemVariants(item, enrichment, serverVariants);
 
 			if(variants.isEmpty()) {
 				String contentKey = "block:" + registryName + "#0";
 				report.add(contentKey, registryName, "0", block.getClass().getName(),
-						safeBlockUnlocalizedName(block), safeBlockDisplayName(block),
-						creativeTabLabel(block.getCreativeTabToDisplayOn()), sourceCategory(block.getClass()),
+						safeBlockUnlocalizedName(block), enrichment.getBlockDisplayName(block),
+						enrichment.getBlockCreativeTabLabel(block), sourceCategory(block.getClass()),
 						inferredFamily(registryName));
 			} else {
 				for(ItemStack stack : variants) {
 					int metadata = stack.getItemDamage();
 					String contentKey = "block:" + registryName + "#" + metadata;
 					report.add(contentKey, registryName, Integer.toString(metadata), block.getClass().getName(),
-							safeUnlocalizedName(stack), safeDisplayName(stack),
-							creativeTabLabel(item.getCreativeTab()), sourceCategory(block.getClass()),
+							safeUnlocalizedName(stack), enrichment.getItemDisplayName(stack),
+							enrichment.getItemCreativeTabLabel(item), sourceCategory(block.getClass()),
 							inferredFamily(registryName));
 				}
 			}
@@ -368,34 +377,17 @@ public final class ContentExporter {
 		return report;
 	}
 
-	private static Report exportCreativeTabs() {
+	private static Report exportCreativeTabs(ContentEnrichment enrichment) {
 		Report report = new Report(
 				"creative_tabs.csv",
 				"CREATIVE_TAB",
 				"content_key", "tab_label", "translated_label", "java_class", "icon_registry_name",
 				"registered_item_count", "source_category");
 
-		for(CreativeTabs tab : CreativeTabs.creativeTabArray) {
-			if(tab == null || !tab.getClass().getName().startsWith("com.hbm.creativetabs.")) continue;
-			String label = safe(tab.getTabLabel());
-			Set<String> itemNames = new LinkedHashSet<String>();
-			for(Object object : Item.itemRegistry) {
-				if(!(object instanceof Item)) continue;
-				Item item = (Item) object;
-				if(item.getCreativeTab() == tab) {
-					String name = registryName(item);
-					if(name != null) itemNames.add(name);
-				}
-			}
-
-			String iconName = "";
-			try {
-				Item icon = tab.getTabIconItem();
-				iconName = registryName(icon);
-			} catch(Throwable ex) { }
-
-			report.add("creative-tab:" + label, label, safeTranslatedTabLabel(tab), tab.getClass().getName(),
-					iconName, Integer.toString(itemNames.size()), sourceCategory(tab.getClass()));
+		for(CreativeTabData tab : enrichment.getCreativeTabs()) {
+			report.add("creative-tab:" + tab.label, tab.label, tab.translatedLabel,
+					tab.javaClass, tab.iconRegistryName,
+					Integer.toString(tab.registeredItemCount), tab.sourceCategory);
 		}
 		return report;
 	}
@@ -431,7 +423,7 @@ public final class ContentExporter {
 		return report;
 	}
 
-	private static Report exportStructureLoot() {
+	private static Report exportStructureLoot(ContentEnrichment enrichment) {
 		Report report = new Report(
 				"structure_loot.csv",
 				"STRUCTURE_LOOT",
@@ -455,7 +447,8 @@ public final class ContentExporter {
 						Integer.toString(stack.getItemDamage()),
 						Integer.toString(content.theMinimumChanceToGenerateItem),
 						Integer.toString(content.theMaximumChanceToGenerateItem),
-						Integer.toString(content.itemWeight), nbt, safeDisplayName(stack),
+						Integer.toString(content.itemWeight), nbt,
+						enrichment.getItemDisplayName(stack),
 						sourceCategory(stack.getItem().getClass())));
 			}
 		}
@@ -586,18 +579,76 @@ public final class ContentExporter {
 		return value.toString();
 	}
 
-	private static List<ItemStack> enumerateItemVariants(Item item) {
-		TreeMap<Integer, ItemStack> byMetadata = new TreeMap<Integer, ItemStack>();
-		List<ItemStack> raw = new ArrayList<ItemStack>();
-		try {
-			item.getSubItems(item, item.getCreativeTab(), raw);
-		} catch(Throwable ex) {
-			MainRegistry.logger.warn("Unable to enumerate sub-items for {}: {}",
-					registryName(item), ex.getClass().getName());
+	private static ContentEnrichment createEnrichment() {
+		if(!FMLCommonHandler.instance().getSide().isClient()) {
+			return new ServerContentEnrichment("");
 		}
-		for(ItemStack stack : raw) {
-			if(stack != null && stack.getItem() == item && !byMetadata.containsKey(stack.getItemDamage())) {
-				byMetadata.put(stack.getItemDamage(), stack.copy());
+		try {
+			Class<?> helperClass = Class.forName(
+					"com.hbm.wocbridge.debug.ContentExporterClientEnrichment",
+					true, ContentExporter.class.getClassLoader());
+			return (ContentEnrichment) helperClass.newInstance();
+		} catch(Throwable ex) {
+			MainRegistry.logger.warn("WOC client-only export enrichment is unavailable; "
+					+ "continuing with server-safe fields only: {}", ex.toString());
+			return new ServerContentEnrichment(ex.getClass().getName());
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private static ServerVariantIndex collectServerVariants() {
+		ServerVariantIndex variants = new ServerVariantIndex();
+		for(Object object : Item.itemRegistry) {
+			if(object instanceof Item) variants.add(new ItemStack((Item) object, 1, 0));
+		}
+
+		for(Object object : (List<Object>) CraftingManager.getInstance().getRecipeList()) {
+			if(!(object instanceof IRecipe)) continue;
+			IRecipe recipe = (IRecipe) object;
+			try {
+				variants.add(recipe.getRecipeOutput());
+				if(recipe instanceof ShapedRecipes) {
+					variants.addAll(Arrays.asList(((ShapedRecipes) recipe).recipeItems));
+				} else if(recipe instanceof ShapelessRecipes) {
+					variants.addAll(((ShapelessRecipes) recipe).recipeItems);
+				} else if(recipe instanceof ShapedOreRecipe) {
+					variants.addAll(Arrays.asList(((ShapedOreRecipe) recipe).getInput()));
+				} else if(recipe instanceof ShapelessOreRecipe) {
+					variants.addAll(((ShapelessOreRecipe) recipe).getInput());
+				}
+			} catch(Throwable ex) { }
+		}
+
+		try {
+			Map<ItemStack, ItemStack> smeltingList =
+					FurnaceRecipes.smelting().getSmeltingList();
+			for(Map.Entry<ItemStack, ItemStack> entry : smeltingList.entrySet()) {
+				variants.add(entry.getKey());
+				variants.add(entry.getValue());
+			}
+		} catch(Throwable ex) { }
+
+		for(ItemPool pool : ItemPool.pools.values()) {
+			if(pool == null || pool.pool == null) continue;
+			for(WeightedRandomChestContent content : pool.pool) {
+				if(content != null) variants.add(content.theItemId);
+			}
+		}
+		return variants;
+	}
+
+	private static List<ItemStack> enumerateItemVariants(Item item,
+			ContentEnrichment enrichment, ServerVariantIndex serverVariants) {
+		TreeMap<Integer, ItemStack> byMetadata = new TreeMap<Integer, ItemStack>();
+		if(enrichment.hasClientEnrichment()) {
+			enrichment.addItemVariants(item, byMetadata);
+		}
+		if(byMetadata.isEmpty()) {
+			for(ItemStack stack : serverVariants.get(item)) {
+				int metadata = stack.getItemDamage();
+				if(!byMetadata.containsKey(metadata)) {
+					byMetadata.put(metadata, stack.copy());
+				}
 			}
 		}
 		if(byMetadata.isEmpty()) byMetadata.put(0, new ItemStack(item, 1, 0));
@@ -932,42 +983,9 @@ public final class ContentExporter {
 		}
 	}
 
-	private static String safeDisplayName(ItemStack stack) {
-		try {
-			return safe(stack.getDisplayName());
-		} catch(Throwable ex) {
-			return "unavailable:" + ex.getClass().getName();
-		}
-	}
-
 	private static String safeBlockUnlocalizedName(Block block) {
 		try {
 			return safe(block.getUnlocalizedName());
-		} catch(Throwable ex) {
-			return "unavailable:" + ex.getClass().getName();
-		}
-	}
-
-	private static String safeBlockDisplayName(Block block) {
-		try {
-			return safe(block.getLocalizedName());
-		} catch(Throwable ex) {
-			return "unavailable:" + ex.getClass().getName();
-		}
-	}
-
-	private static String creativeTabLabel(CreativeTabs tab) {
-		if(tab == null) return "";
-		try {
-			return safe(tab.getTabLabel());
-		} catch(Throwable ex) {
-			return "unavailable:" + ex.getClass().getName();
-		}
-	}
-
-	private static String safeTranslatedTabLabel(CreativeTabs tab) {
-		try {
-			return safe(tab.getTranslatedTabLabel());
 		} catch(Throwable ex) {
 			return "unavailable:" + ex.getClass().getName();
 		}
@@ -1263,6 +1281,145 @@ public final class ContentExporter {
 		private ProfileEntry(String key, String kind) {
 			this.key = key;
 			this.kind = kind;
+		}
+	}
+
+	public interface ContentEnrichment {
+		boolean hasClientEnrichment();
+		void addItemVariants(Item item, Map<Integer, ItemStack> variants);
+		String getItemDisplayName(ItemStack stack);
+		String getBlockDisplayName(Block block);
+		String getItemCreativeTabLabel(Item item);
+		String getBlockCreativeTabLabel(Block block);
+		List<CreativeTabData> getCreativeTabs();
+		String getSummary();
+	}
+
+	public static final class CreativeTabData {
+		private final String label;
+		private final String translatedLabel;
+		private final String javaClass;
+		private final String iconRegistryName;
+		private final int registeredItemCount;
+		private final String sourceCategory;
+
+		public CreativeTabData(String label, String translatedLabel, String javaClass,
+				String iconRegistryName, int registeredItemCount, String sourceCategory) {
+			this.label = safe(label);
+			this.translatedLabel = safe(translatedLabel);
+			this.javaClass = safe(javaClass);
+			this.iconRegistryName = safe(iconRegistryName);
+			this.registeredItemCount = registeredItemCount;
+			this.sourceCategory = safe(sourceCategory);
+		}
+	}
+
+	private static final class ServerContentEnrichment implements ContentEnrichment {
+		private final String clientFailure;
+
+		private ServerContentEnrichment(String clientFailure) {
+			this.clientFailure = safe(clientFailure);
+		}
+
+		@Override
+		public boolean hasClientEnrichment() {
+			return false;
+		}
+
+		@Override
+		public void addItemVariants(Item item, Map<Integer, ItemStack> variants) { }
+
+		@Override
+		public String getItemDisplayName(ItemStack stack) {
+			return "";
+		}
+
+		@Override
+		public String getBlockDisplayName(Block block) {
+			return "";
+		}
+
+		@Override
+		public String getItemCreativeTabLabel(Item item) {
+			return "";
+		}
+
+		@Override
+		public String getBlockCreativeTabLabel(Block block) {
+			return "";
+		}
+
+		@Override
+		public List<CreativeTabData> getCreativeTabs() {
+			return Collections.emptyList();
+		}
+
+		@Override
+		public String getSummary() {
+			String reason = clientFailure.isEmpty()
+					? "dedicated-server mode"
+					: "client helper unavailable (" + clientFailure + ")";
+			return reason + " omitted display names, creative-tab labels/icons/membership, "
+					+ "and client creative subtype enumeration; metadata variants came from "
+					+ "registry defaults, crafting/smelting recipes, and structure loot.";
+		}
+	}
+
+	private static final class ServerVariantIndex {
+		private final Map<Item, TreeMap<Integer, ItemStack>> variants =
+				new HashMap<Item, TreeMap<Integer, ItemStack>>();
+
+		private void add(Object value) {
+			if(value == null) return;
+			if(value instanceof ItemStack) {
+				addStack((ItemStack) value);
+				return;
+			}
+			if(value instanceof Item) {
+				addStack(new ItemStack((Item) value, 1, 0));
+				return;
+			}
+			if(value instanceof Block) {
+				Item item = Item.getItemFromBlock((Block) value);
+				if(item != null) addStack(new ItemStack(item, 1, 0));
+				return;
+			}
+			if(value instanceof Collection) {
+				addAll((Collection<?>) value);
+				return;
+			}
+			if(value.getClass().isArray()) {
+				for(int index = 0; index < Array.getLength(value); index++) {
+					add(Array.get(value, index));
+				}
+			}
+		}
+
+		private void addAll(Collection<?> values) {
+			if(values == null) return;
+			for(Object value : values) add(value);
+		}
+
+		private void addStack(ItemStack stack) {
+			if(stack == null || stack.getItem() == null) return;
+			int metadata = stack.getItemDamage();
+			if(metadata < 0 || metadata == OreDictionary.WILDCARD_VALUE || metadata > 32767) return;
+
+			TreeMap<Integer, ItemStack> itemVariants = variants.get(stack.getItem());
+			if(itemVariants == null) {
+				itemVariants = new TreeMap<Integer, ItemStack>();
+				variants.put(stack.getItem(), itemVariants);
+			}
+			if(!itemVariants.containsKey(metadata)) {
+				itemVariants.put(metadata, new ItemStack(stack.getItem(), 1, metadata));
+			}
+		}
+
+		private Collection<ItemStack> get(Item item) {
+			TreeMap<Integer, ItemStack> itemVariants = variants.get(item);
+			return itemVariants == null
+					? Collections.<ItemStack>emptyList()
+					: itemVariants.values();
 		}
 	}
 

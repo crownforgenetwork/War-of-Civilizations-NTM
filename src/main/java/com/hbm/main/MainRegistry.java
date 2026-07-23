@@ -42,6 +42,7 @@ import com.hbm.tileentity.machine.rbmk.RBMKDials;
 import com.hbm.util.*;
 import com.hbm.wocbridge.command.CommandWocDev;
 import com.hbm.wocbridge.config.WocDevelopmentConfig;
+import com.hbm.wocbridge.content.ContentProfileManager;
 import com.hbm.world.biome.BiomeGenCraterBase;
 import com.hbm.world.feature.BedrockOre;
 import com.hbm.world.feature.OreCave;
@@ -676,6 +677,7 @@ public class MainRegistry {
 			event.registerServerCommand(new CommandWocDev());
 		}
 		ArcFurnaceRecipes.registerFurnaceSmeltables(); // because we have to wait for other mods to take their merry ass time to register recipes
+		ContentProfileManager.initialize();
 	}
 
 	@EventHandler

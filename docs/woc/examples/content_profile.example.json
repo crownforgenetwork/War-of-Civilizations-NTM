@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "profileId": "woc_phase_2_example",
+  "defaultState": "AVAILABLE",
+  "rules": [
+    {
+      "key": "item:hbm:item.acetylene_torch#0",
+      "kind": "ITEM",
+      "state": "AVAILABLE",
+      "notes": "Explicitly available example."
+    },
+    {
+      "key": "block:hbm:tile.machine_assembly_machine#0",
+      "kind": "BLOCK",
+      "state": "RESEARCH_LOCKED",
+      "unlockTechnology": "woc:industrial_automation"
+    },
+    {
+      "key": "item:hbm:tile.machine_assembly_machine#0",
+      "kind": "ITEM",
+      "state": "PROJECT_LOCKED",
+      "requiredProject": "woc:assembly_line",
+      "salvageKey": "item:hbm:item.acetylene_torch#0"
+    },
+    {
+      "key": "entity:hbm.entity_acid_bomb#106",
+      "kind": "ENTITY",
+      "state": "EVENT_ONLY",
+      "eventMetadata": {
+        "eventId": "woc:example_event"
+      }
+    },
+    {
+      "key": "worldgen:aircraft_carrier",
+      "kind": "WORLDGEN_FEATURE",
+      "state": "DISABLED",
+      "notes": "Descriptive only in Phase 2; generation is not disabled."
+    },
+    {
+      "key": "machine-recipe:ArcFurnace:00644f16368fbc092b3b576c0bc78c7caf58132e08aed1ca98973d4e60c1cf00:1",
+      "kind": "MACHINE_RECIPE",
+      "state": "UNREVIEWED",
+      "adminMetadata": {
+        "reviewOwner": "example"
+      }
+    }
+  ],
+  "tags": {
+    "woc:example_industry": [
+      "item:hbm:item.acetylene_torch#0",
+      "block:hbm:tile.machine_assembly_machine#0",
+      "item:hbm:tile.machine_assembly_machine#0"
+    ]
+  },
+  "notes": "Documentation example only. It is never used automatically as production configuration."
+}
