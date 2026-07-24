@@ -1,0 +1,675 @@
+{
+  "defaultState": "AVAILABLE",
+  "notes": "DRAFT / NOT FOR PRODUCTION. COMPLETE only for the source-reviewed boundary of 39 conventional handheld HBM firearms and all 55 ordinary small-arms EnumAmmo variants. Explosive ammunition, launchers, missiles, incendiary and chemical projectors, energy weapons, nuclear weapons, unusual special weapons, armor, tools, and machines are intentionally outside this boundary. Generated from taxonomy d30364f0a86abe874765fe358f5e6f3e46340d2da3df873285aaf400e0cc4e19 and inventory ad8e95f34c9be0814f89b7120c9e94aee976c9e381e78898b46164a76192874c. Never installed or activated automatically.",
+  "profileBoundary": "reviewed conventional handheld firearms and ordinary small-arms ammunition",
+  "profileCompleteness": "COMPLETE",
+  "profileId": "no_hbm_conventional_firearms_phase4_draft",
+  "reviewedAmmunitionRuleCount": 55,
+  "reviewedFirearmRuleCount": 39,
+  "rules": [
+    {
+      "key": "item:hbm:item.ammo_standard#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#1",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#10",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#11",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#12",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#13",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#14",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#15",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#16",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#17",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#18",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#19",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#2",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#20",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#21",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#22",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#23",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#24",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#25",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#26",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#27",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#28",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#29",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#3",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#30",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#31",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#32",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#33",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#34",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#35",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#36",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#37",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#4",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#41",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#42",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#43",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#44",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#45",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#46",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#47",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#5",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#6",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#7",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#78",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#79",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#8",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#80",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#81",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#85",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#86",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#87",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#88",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#89",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#9",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.ammo_standard#94",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_am180#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_amat#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_amat_penance#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_amat_subtlety#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_autoshotgun#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_autoshotgun_heretic#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_autoshotgun_sexy#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_autoshotgun_shredder#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_carbine#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_double_barrel#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_double_barrel_sacred_dragon#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_g3#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_g3_zebra#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_greasegun#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_hangman#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_heavy_revolver#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_heavy_revolver_lilmac#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_heavy_revolver_protege#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_henry#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_henry_lincoln#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_lag#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_liberator#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_light_revolver#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_light_revolver_atlas#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_light_revolver_dani#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_m2#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_maresleg#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_maresleg_akimbo#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_maresleg_broken#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_mas36#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_minigun#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_minigun_dual#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_pepperbox#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_spas12#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_star_f#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_star_f_akimbo#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_stg77#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_uzi#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    },
+    {
+      "key": "item:hbm:item.gun_uzi_akimbo#0",
+      "kind": "ITEM",
+      "notes": "Phase 4 source-reviewed conventional external-gun-mod replacement candidate; inactive draft only.",
+      "state": "DISABLED"
+    }
+  ],
+  "schemaVersion": 1,
+  "tags": {
+    "woc:draft.no_hbm_conventional_firearms": [
+      "item:hbm:item.ammo_standard#0",
+      "item:hbm:item.ammo_standard#1",
+      "item:hbm:item.ammo_standard#10",
+      "item:hbm:item.ammo_standard#11",
+      "item:hbm:item.ammo_standard#12",
+      "item:hbm:item.ammo_standard#13",
+      "item:hbm:item.ammo_standard#14",
+      "item:hbm:item.ammo_standard#15",
+      "item:hbm:item.ammo_standard#16",
+      "item:hbm:item.ammo_standard#17",
+      "item:hbm:item.ammo_standard#18",
+      "item:hbm:item.ammo_standard#19",
+      "item:hbm:item.ammo_standard#2",
+      "item:hbm:item.ammo_standard#20",
+      "item:hbm:item.ammo_standard#21",
+      "item:hbm:item.ammo_standard#22",
+      "item:hbm:item.ammo_standard#23",
+      "item:hbm:item.ammo_standard#24",
+      "item:hbm:item.ammo_standard#25",
+      "item:hbm:item.ammo_standard#26",
+      "item:hbm:item.ammo_standard#27",
+      "item:hbm:item.ammo_standard#28",
+      "item:hbm:item.ammo_standard#29",
+      "item:hbm:item.ammo_standard#3",
+      "item:hbm:item.ammo_standard#30",
+      "item:hbm:item.ammo_standard#31",
+      "item:hbm:item.ammo_standard#32",
+      "item:hbm:item.ammo_standard#33",
+      "item:hbm:item.ammo_standard#34",
+      "item:hbm:item.ammo_standard#35",
+      "item:hbm:item.ammo_standard#36",
+      "item:hbm:item.ammo_standard#37",
+      "item:hbm:item.ammo_standard#4",
+      "item:hbm:item.ammo_standard#41",
+      "item:hbm:item.ammo_standard#42",
+      "item:hbm:item.ammo_standard#43",
+      "item:hbm:item.ammo_standard#44",
+      "item:hbm:item.ammo_standard#45",
+      "item:hbm:item.ammo_standard#46",
+      "item:hbm:item.ammo_standard#47",
+      "item:hbm:item.ammo_standard#5",
+      "item:hbm:item.ammo_standard#6",
+      "item:hbm:item.ammo_standard#7",
+      "item:hbm:item.ammo_standard#78",
+      "item:hbm:item.ammo_standard#79",
+      "item:hbm:item.ammo_standard#8",
+      "item:hbm:item.ammo_standard#80",
+      "item:hbm:item.ammo_standard#81",
+      "item:hbm:item.ammo_standard#85",
+      "item:hbm:item.ammo_standard#86",
+      "item:hbm:item.ammo_standard#87",
+      "item:hbm:item.ammo_standard#88",
+      "item:hbm:item.ammo_standard#89",
+      "item:hbm:item.ammo_standard#9",
+      "item:hbm:item.ammo_standard#94",
+      "item:hbm:item.gun_am180#0",
+      "item:hbm:item.gun_amat#0",
+      "item:hbm:item.gun_amat_penance#0",
+      "item:hbm:item.gun_amat_subtlety#0",
+      "item:hbm:item.gun_autoshotgun#0",
+      "item:hbm:item.gun_autoshotgun_heretic#0",
+      "item:hbm:item.gun_autoshotgun_sexy#0",
+      "item:hbm:item.gun_autoshotgun_shredder#0",
+      "item:hbm:item.gun_carbine#0",
+      "item:hbm:item.gun_double_barrel#0",
+      "item:hbm:item.gun_double_barrel_sacred_dragon#0",
+      "item:hbm:item.gun_g3#0",
+      "item:hbm:item.gun_g3_zebra#0",
+      "item:hbm:item.gun_greasegun#0",
+      "item:hbm:item.gun_hangman#0",
+      "item:hbm:item.gun_heavy_revolver#0",
+      "item:hbm:item.gun_heavy_revolver_lilmac#0",
+      "item:hbm:item.gun_heavy_revolver_protege#0",
+      "item:hbm:item.gun_henry#0",
+      "item:hbm:item.gun_henry_lincoln#0",
+      "item:hbm:item.gun_lag#0",
+      "item:hbm:item.gun_liberator#0",
+      "item:hbm:item.gun_light_revolver#0",
+      "item:hbm:item.gun_light_revolver_atlas#0",
+      "item:hbm:item.gun_light_revolver_dani#0",
+      "item:hbm:item.gun_m2#0",
+      "item:hbm:item.gun_maresleg#0",
+      "item:hbm:item.gun_maresleg_akimbo#0",
+      "item:hbm:item.gun_maresleg_broken#0",
+      "item:hbm:item.gun_mas36#0",
+      "item:hbm:item.gun_minigun#0",
+      "item:hbm:item.gun_minigun_dual#0",
+      "item:hbm:item.gun_pepperbox#0",
+      "item:hbm:item.gun_spas12#0",
+      "item:hbm:item.gun_star_f#0",
+      "item:hbm:item.gun_star_f_akimbo#0",
+      "item:hbm:item.gun_stg77#0",
+      "item:hbm:item.gun_uzi#0",
+      "item:hbm:item.gun_uzi_akimbo#0"
+    ]
+  },
+  "unresolvedBoundaryKeys": []
+}

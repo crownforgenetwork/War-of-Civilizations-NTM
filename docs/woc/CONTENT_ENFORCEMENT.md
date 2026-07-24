@@ -137,3 +137,16 @@ Known omissions:
 Giving a weighted structure zero weight changes the weighted selection bound
 for future chunks. That can change which remaining structure is selected for a
 given seed, although unrelated generation systems are not directly mutated.
+
+## Phase 4 taxonomy dry-run boundary
+
+`/wocdev taxonomy dry-run-firearms` validates the generated
+no-HBM-conventional-firearms draft through Phase 2, constructs a temporary
+in-memory DISABLED-only policy, and runs the Phase 3 adapters with
+`mutate=false`. It does not install the draft, replace the active policy,
+register new handlers, or enable enforcement.
+
+Taxonomy states other than exact `DISABLED` remain descriptive. Phase 4 does
+not add enforcement for `RESEARCH_LOCKED`, `PROJECT_LOCKED`, `EVENT_ONLY`, or
+`UNREVIEWED`. See `CONTENT_TAXONOMY.md` for the inactive draft profiles and
+classification workflow.

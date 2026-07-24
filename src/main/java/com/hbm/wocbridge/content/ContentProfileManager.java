@@ -65,6 +65,44 @@ public final class ContentProfileManager {
 		}
 	}
 
+	public static final class ToolingValidation {
+		private final ContentProfile profile;
+		private final ProfileValidationResult validation;
+		private final String checksum;
+		private final boolean accepted;
+		private final boolean missing;
+
+		private ToolingValidation(ContentProfile profile,
+				ProfileValidationResult validation, String checksum,
+				boolean accepted, boolean missing) {
+			this.profile = profile;
+			this.validation = validation;
+			this.checksum = checksum;
+			this.accepted = accepted;
+			this.missing = missing;
+		}
+
+		public ContentProfile getProfile() {
+			return profile;
+		}
+
+		public ProfileValidationResult getValidation() {
+			return validation;
+		}
+
+		public String getChecksum() {
+			return checksum;
+		}
+
+		public boolean isAccepted() {
+			return accepted;
+		}
+
+		public boolean isMissing() {
+			return missing;
+		}
+	}
+
 	private static final class Snapshot {
 		private final ContentProfile profile;
 		private final List<ProfileValidationIssue> issues;
@@ -169,6 +207,14 @@ public final class ContentProfileManager {
 				attempt.isAccepted(), false);
 		return new ValidationRun(attempt.isAccepted(), false, attempt.missing,
 				attempt.validation, report);
+	}
+
+	public static synchronized ToolingValidation validateExternalProfile(
+			File profileFile, boolean strict) {
+		Attempt attempt = evaluate(profileFile, strict);
+		return new ToolingValidation(attempt.effectiveProfile,
+				attempt.validation, attempt.checksum,
+				attempt.isAccepted(), attempt.missing);
 	}
 
 	public static synchronized ValidationRun reload() {

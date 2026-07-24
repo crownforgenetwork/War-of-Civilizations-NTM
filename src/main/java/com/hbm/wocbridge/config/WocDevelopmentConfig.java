@@ -21,6 +21,13 @@ public final class WocDevelopmentConfig {
 	public static boolean sanitizeDisabledInventory = false;
 	public static boolean strictEnforcementStartup = false;
 	public static boolean writeEnforcementAudit = true;
+	public static boolean enableContentTaxonomyTools = true;
+	public static String taxonomyDefinitionPath =
+			"docs/woc/taxonomy/hbm_taxonomy.v1.json";
+	public static boolean writeTaxonomyReports = true;
+	public static boolean allowTaxonomyHeuristicSuggestions = false;
+	public static boolean taxonomyStrictValidation = true;
+	public static boolean writeDraftProfiles = true;
 
 	private WocDevelopmentConfig() { }
 
@@ -93,6 +100,36 @@ public final class WocDevelopmentConfig {
 		writeEnforcementAudit = config.get(
 				CATEGORY, "writeEnforcementAudit", true,
 				"Writes a deterministic Phase 3 enforcement audit under build/reports/woc.")
+				.getBoolean(true);
+		enableContentTaxonomyTools = config.get(
+				CATEGORY, "enableContentTaxonomyTools", true,
+				"Enables explicit Phase 4 taxonomy validation, reports, and draft generation. "
+						+ "Taxonomy is not loaded during normal gameplay.")
+				.getBoolean(true);
+		taxonomyDefinitionPath = config.get(
+				CATEGORY, "taxonomyDefinitionPath",
+				"docs/woc/taxonomy/hbm_taxonomy.v1.json",
+				"Repository-relative or absolute Phase 4 taxonomy definition path.")
+				.getString();
+		writeTaxonomyReports = config.get(
+				CATEGORY, "writeTaxonomyReports", true,
+				"Writes deterministic taxonomy reports under build/reports/woc only "
+						+ "when an explicit taxonomy command is run.")
+				.getBoolean(true);
+		allowTaxonomyHeuristicSuggestions = config.get(
+				CATEGORY, "allowTaxonomyHeuristicSuggestions", false,
+				"Reserved for optional unreviewed suggestions. Phase 4 never promotes "
+						+ "heuristic suggestions to reviewed classifications.")
+				.getBoolean(false);
+		taxonomyStrictValidation = config.get(
+				CATEGORY, "taxonomyStrictValidation", true,
+				"Rejects inconsistent Phase 4 vocabulary, duplicate rules, and unsafe "
+						+ "selector definitions.")
+				.getBoolean(true);
+		writeDraftProfiles = config.get(
+				CATEGORY, "writeDraftProfiles", true,
+				"Allows explicit taxonomy generation to refresh documented draft profiles. "
+						+ "Generated profiles are never installed into config.")
 				.getBoolean(true);
 	}
 }

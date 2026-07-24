@@ -11,6 +11,7 @@ import com.hbm.wocbridge.config.WocDevelopmentConfig;
 import com.hbm.wocbridge.content.ContentKind;
 import com.hbm.wocbridge.content.ContentProfileManager;
 import com.hbm.wocbridge.content.ContentProfileManager.ValidationRun;
+import com.hbm.wocbridge.content.ContentProfileManager.ToolingValidation;
 import com.hbm.wocbridge.enforcement.EnforcementAdapterResult.ReloadClassification;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -91,6 +92,19 @@ public final class ContentEnforcementManager {
 	public static List<EnforcementAdapterResult> dryRun() {
 		return Collections.unmodifiableList(runAdapters(
 				ContentEnforcementPolicy.fromActiveProfile(), false));
+	}
+
+	public static List<EnforcementAdapterResult> dryRunProfile(
+			File profileFile, boolean strict) {
+		ToolingValidation validation =
+				ContentProfileManager.validateExternalProfile(profileFile, strict);
+		if(!validation.isAccepted() || validation.getProfile() == null) {
+			return Collections.emptyList();
+		}
+		ContentEnforcementPolicy toolingPolicy =
+				ContentEnforcementPolicy.forTooling(
+						validation.getProfile(), validation.getChecksum());
+		return Collections.unmodifiableList(runAdapters(toolingPolicy, false));
 	}
 
 	public static ContentEnforcementPolicy getPolicy() {

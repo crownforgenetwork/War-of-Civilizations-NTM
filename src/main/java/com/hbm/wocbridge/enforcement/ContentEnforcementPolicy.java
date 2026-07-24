@@ -6,6 +6,7 @@ import java.util.TreeSet;
 
 import com.hbm.wocbridge.config.WocDevelopmentConfig;
 import com.hbm.wocbridge.content.ContentKind;
+import com.hbm.wocbridge.content.ContentProfile;
 import com.hbm.wocbridge.content.ContentProfileManager;
 import com.hbm.wocbridge.content.ContentRule;
 import com.hbm.wocbridge.content.ContentState;
@@ -53,6 +54,18 @@ public final class ContentEnforcementPolicy {
 		TreeSet<String> disabled = new TreeSet<String>();
 		if(keys != null) Collections.addAll(disabled, keys);
 		return new ContentEnforcementPolicy(active, reason, "fixture", "fixture", disabled);
+	}
+
+	static ContentEnforcementPolicy forTooling(
+			ContentProfile profile, String checksum) {
+		TreeSet<String> disabled = new TreeSet<String>();
+		for(ContentRule rule : profile.getEffectiveRules()) {
+			if(rule.getState() == ContentState.DISABLED) {
+				disabled.add(rule.getKey().getValue());
+			}
+		}
+		return new ContentEnforcementPolicy(true, "", profile.getProfileId(),
+				checksum, disabled);
 	}
 
 	public ContentEnforcementDecision decide(String contentKey) {

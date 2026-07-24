@@ -198,3 +198,22 @@ iteration order are included. Property order and file line endings cannot change
   enforce exact `DISABLED` rules; it does not enforce research or project fields.
 
 See `CONTENT_ENFORCEMENT.md` for adapter coverage, reload behavior, and server/client boundaries.
+
+## Phase 4 taxonomy drafts
+
+Phase 4 can generate two schema-v1 preparation artifacts under
+`docs/woc/examples`: a broad WOC server draft and an optional
+no-HBM-conventional-firearms draft. They use exact rules,
+`defaultState: AVAILABLE`, and prominent
+`DRAFT / NOT FOR PRODUCTION` notes. Generation never copies either file to the
+runtime `eclipse/config/hbmConfig/woc/content_profile.json` location.
+
+The taxonomy tooling validates the WOC server draft permissively because
+descriptive `UNREVIEWED` entries are intentional. It validates the
+94-rule no-HBM-conventional-firearms draft strictly. `COMPLETE` applies only to
+its stated reviewed conventional handheld-firearm and ordinary small-arms
+ammunition boundary, not to artillery, launchers, missiles, explosive,
+incendiary/chemical, energy, nuclear, unusual, or utility weapon systems.
+Validation is non-installing and cannot replace the active profile snapshot.
+See `CONTENT_TAXONOMY.md` for selector precedence, controlled vocabulary,
+report checksums, and review workflow.
