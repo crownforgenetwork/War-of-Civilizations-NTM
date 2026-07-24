@@ -71,10 +71,12 @@ public final class ContentProfileManager {
 		private final Map<String, List<ProfileValidationIssue>> issueIndex;
 		private final String checksum;
 		private final boolean strict;
+		private final boolean acceptedFromDisk;
 		private final RegistryResolver registryResolver;
 
 		private Snapshot(ContentProfile profile, List<ProfileValidationIssue> issues,
-				String checksum, boolean strict, RegistryResolver registryResolver) {
+				String checksum, boolean strict, boolean acceptedFromDisk,
+				RegistryResolver registryResolver) {
 			this.profile = profile;
 			this.issues = Collections.unmodifiableList(
 					new ArrayList<ProfileValidationIssue>(issues));
@@ -98,6 +100,7 @@ public final class ContentProfileManager {
 			this.issueIndex = Collections.unmodifiableMap(immutableIndex);
 			this.checksum = checksum;
 			this.strict = strict;
+			this.acceptedFromDisk = acceptedFromDisk;
 			this.registryResolver = registryResolver;
 		}
 	}
@@ -126,7 +129,7 @@ public final class ContentProfileManager {
 	private static final ContentProfile FALLBACK_PROFILE = ContentProfile.availableFallback();
 	private static volatile Snapshot active = new Snapshot(FALLBACK_PROFILE,
 			Collections.<ProfileValidationIssue>emptyList(),
-			ContentProfileChecksum.sha256(FALLBACK_PROFILE), false, null);
+			ContentProfileChecksum.sha256(FALLBACK_PROFILE), false, false, null);
 	private static volatile boolean initialized;
 
 	private ContentProfileManager() { }
@@ -211,13 +214,13 @@ public final class ContentProfileManager {
 	private static void install(Attempt attempt, boolean strict) {
 		active = new Snapshot(attempt.effectiveProfile,
 				attempt.validation.getIssues(), attempt.checksum, strict,
-				attempt.registryResolver);
+				true, attempt.registryResolver);
 	}
 
 	private static Snapshot fallbackSnapshot(List<ProfileValidationIssue> issues,
 			boolean strict) {
 		return new Snapshot(FALLBACK_PROFILE, issues,
-				ContentProfileChecksum.sha256(FALLBACK_PROFILE), strict, null);
+				ContentProfileChecksum.sha256(FALLBACK_PROFILE), strict, false, null);
 	}
 
 	public static ContentState getState(ContentKey key) {
@@ -318,6 +321,19 @@ public final class ContentProfileManager {
 
 	public static String getModeName() {
 		return active.strict ? "STRICT" : "PERMISSIVE";
+	}
+
+	public static boolean isAcceptedFromDisk() {
+		return active.acceptedFromDisk;
+	}
+
+	public static boolean isFallbackActive() {
+		return !active.acceptedFromDisk;
+	}
+
+	public static List<ContentRule> getEffectiveRules() {
+		return Collections.unmodifiableList(
+				new ArrayList<ContentRule>(active.profile.getEffectiveRules()));
 	}
 
 	public static File getProfileFile() {

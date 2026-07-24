@@ -24,7 +24,7 @@ public class CommandWocDev extends CommandBase {
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
-		return "/wocdev <export-content|profile <validate|reload|status>|content <held|canonical-key>>";
+		return "/wocdev <export-content|profile ...|content ...|enforcement <status|audit|reload|dry-run|explain <held|key>>>";
 	}
 
 	@Override
@@ -61,6 +61,7 @@ public class CommandWocDev extends CommandBase {
 		}
 
 		if(WocProfileCommands.process(sender, args)) return;
+		if(WocEnforcementCommands.process(sender, args)) return;
 		throw new WrongUsageException(getCommandUsage(sender), new Object[0]);
 	}
 
@@ -68,12 +69,21 @@ public class CommandWocDev extends CommandBase {
 	@Override
 	public List<String> addTabCompletionOptions(ICommandSender sender, String[] args) {
 		if(args.length == 1) {
-			return getListOfStringsMatchingLastWord(args, "export-content", "profile", "content");
+			return getListOfStringsMatchingLastWord(args,
+					"export-content", "profile", "content", "enforcement");
 		}
 		if(args.length == 2 && "profile".equals(args[0])) {
 			return getListOfStringsMatchingLastWord(args, "validate", "reload", "status");
 		}
 		if(args.length == 2 && "content".equals(args[0])) {
+			return getListOfStringsMatchingLastWord(args, "held");
+		}
+		if(args.length == 2 && "enforcement".equals(args[0])) {
+			return getListOfStringsMatchingLastWord(args,
+					"status", "audit", "reload", "dry-run", "explain");
+		}
+		if(args.length == 3 && "enforcement".equals(args[0])
+				&& "explain".equals(args[1])) {
 			return getListOfStringsMatchingLastWord(args, "held");
 		}
 		return Collections.emptyList();

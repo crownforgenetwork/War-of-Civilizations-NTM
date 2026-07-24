@@ -11,8 +11,8 @@ import com.hbm.inventory.fluid.FluidType;
 import com.hbm.inventory.fluid.Fluids;
 import com.hbm.world.gen.nbt.NBTStructure;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public final class RegistryResolver {
@@ -114,11 +114,18 @@ public final class RegistryResolver {
 	}
 
 	private static Set<String> collectCreativeTabNames() {
-		Set<String> names = new HashSet<String>();
-		for(CreativeTabs tab : CreativeTabs.creativeTabArray) {
-			if(tab != null) names.add(tab.getTabLabel());
+		if(!FMLCommonHandler.instance().getSide().isClient()) {
+			return Collections.emptySet();
 		}
-		return Collections.unmodifiableSet(names);
+		try {
+			Class<?> helper = Class.forName(
+					"com.hbm.wocbridge.content.RegistryResolverClientEnrichment",
+					true, RegistryResolver.class.getClassLoader());
+			return Collections.unmodifiableSet(new HashSet<String>(
+					(Set<String>) helper.getMethod("collectCreativeTabNames").invoke(null)));
+		} catch(Throwable ex) {
+			return Collections.emptySet();
+		}
 	}
 
 	private static Resolution resolved() {

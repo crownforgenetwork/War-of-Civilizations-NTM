@@ -7,7 +7,9 @@ replace, gate, or otherwise change any item, block, entity, fluid, recipe, loot 
 tab, or world-generation feature. The profile service only parses data, validates references,
 indexes rules and tags, computes a checksum, and answers queries.
 
-Phase 3 may consume this API to implement enforcement. No Phase 3 enforcement exists here.
+The Phase 2 API remains descriptive. The separate Phase 3 enforcement consumer is documented in
+[`CONTENT_ENFORCEMENT.md`](CONTENT_ENFORCEMENT.md) and acts only on exact `DISABLED` rules when
+its independent safety gates pass.
 
 ## Location and startup behavior
 
@@ -192,7 +194,7 @@ iteration order are included. Property order and file line endings cannot change
   by calling client-only display or creative enumeration code.
 - Reserved unlock, project, replacement, salvage, event, and admin fields have no behavior.
 - Profile state is server-memory diagnostic data only; there is no client synchronization or UI.
-- No content is hidden, removed, gated, filtered, or blocked.
+- The profile layer itself does not mutate content. Phase 3's separately configured consumer can
+  enforce exact `DISABLED` rules; it does not enforce research or project fields.
 
-Phase 3 can consume the immutable query API at explicit gameplay boundaries. That later work must
-define enforcement policy separately; it is intentionally absent from this phase.
+See `CONTENT_ENFORCEMENT.md` for adapter coverage, reload behavior, and server/client boundaries.

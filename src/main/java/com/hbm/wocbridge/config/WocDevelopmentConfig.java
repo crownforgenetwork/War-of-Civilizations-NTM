@@ -9,12 +9,24 @@ public final class WocDevelopmentConfig {
 	public static boolean enableDevelopmentTools = true;
 	public static boolean strictContentProfileValidation = false;
 	public static boolean writeContentProfileExample = true;
+	public static boolean enableContentEnforcement = false;
+	public static boolean enforceDisabledCrafting = true;
+	public static boolean enforceDisabledSmelting = true;
+	public static boolean enforceDisabledMachineRecipes = true;
+	public static boolean enforceDisabledItemUse = true;
+	public static boolean enforceDisabledBlockPlacement = true;
+	public static boolean enforceDisabledLoot = true;
+	public static boolean enforceDisabledWorldgen = true;
+	public static boolean hideDisabledFromNEI = true;
+	public static boolean sanitizeDisabledInventory = false;
+	public static boolean strictEnforcementStartup = false;
+	public static boolean writeEnforcementAudit = true;
 
 	private WocDevelopmentConfig() { }
 
 	public static void loadFromConfig(Configuration config) {
 		config.addCustomCategoryComment(CATEGORY,
-				"War of Civilizations development tools and read-only content profile settings.");
+				"War of Civilizations development tools, content profiles, and DISABLED-only enforcement.");
 		enableDevelopmentTools = config.get(
 				CATEGORY,
 				"enableDevelopmentTools",
@@ -35,6 +47,52 @@ public final class WocDevelopmentConfig {
 				true,
 				"Writes content_profile.example.json atomically when the real profile is missing. "
 						+ "The example is never loaded and is never overwritten.")
+				.getBoolean(true);
+		enableContentEnforcement = config.get(
+				CATEGORY, "enableContentEnforcement", false,
+				"Enables Phase 3 enforcement for rules whose exact state is DISABLED. "
+						+ "Missing or rejected profiles fail open.").getBoolean(false);
+		enforceDisabledCrafting = config.get(
+				CATEGORY, "enforceDisabledCrafting", true,
+				"Removes disabled crafting recipes during server startup.").getBoolean(true);
+		enforceDisabledSmelting = config.get(
+				CATEGORY, "enforceDisabledSmelting", true,
+				"Removes disabled furnace recipes during server startup.").getBoolean(true);
+		enforceDisabledMachineRecipes = config.get(
+				CATEGORY, "enforceDisabledMachineRecipes", true,
+				"Removes disabled recipes from supported HBM machine registries at startup.")
+				.getBoolean(true);
+		enforceDisabledItemUse = config.get(
+				CATEGORY, "enforceDisabledItemUse", true,
+				"Denies player use of exact disabled item metadata variants on the server.")
+				.getBoolean(true);
+		enforceDisabledBlockPlacement = config.get(
+				CATEGORY, "enforceDisabledBlockPlacement", true,
+				"Denies placement of exact disabled block metadata variants on the server.")
+				.getBoolean(true);
+		enforceDisabledLoot = config.get(
+				CATEGORY, "enforceDisabledLoot", true,
+				"Removes disabled entries from HBM ItemPool structure loot at startup.")
+				.getBoolean(true);
+		enforceDisabledWorldgen = config.get(
+				CATEGORY, "enforceDisabledWorldgen", true,
+				"Disables supported weighted HBM NBT structures before new chunk generation.")
+				.getBoolean(true);
+		hideDisabledFromNEI = config.get(
+				CATEGORY, "hideDisabledFromNEI", true,
+				"Hides exact disabled item/block metadata variants from NEI on clients.")
+				.getBoolean(true);
+		sanitizeDisabledInventory = config.get(
+				CATEGORY, "sanitizeDisabledInventory", false,
+				"Reserved safety switch. Phase 3 does not scan or mutate inventories.")
+				.getBoolean(false);
+		strictEnforcementStartup = config.get(
+				CATEGORY, "strictEnforcementStartup", false,
+				"Stops startup if an active DISABLED rule targets an unsupported enforcement path.")
+				.getBoolean(false);
+		writeEnforcementAudit = config.get(
+				CATEGORY, "writeEnforcementAudit", true,
+				"Writes a deterministic Phase 3 enforcement audit under build/reports/woc.")
 				.getBoolean(true);
 	}
 }

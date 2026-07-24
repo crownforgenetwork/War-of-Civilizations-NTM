@@ -197,6 +197,14 @@ public class NBTStructure {
 		return namedMap.get(name);
 	}
 
+	public static boolean disableWeightedStructure(String name) {
+		SpawnCondition spawn = namedMap.get(name);
+		if(spawn == null || spawn.checkCoordinates != null) return false;
+		spawn.spawnWeight = 0;
+		validBiomeCache.clear();
+		return true;
+	}
+
 	// Saves a selected area into an NBT structure (+ some of our non-standard stuff to support 1.7.10)
 	public static NBTTagCompound saveArea(World world, int x1, int y1, int z1, int x2, int y2, int z2, Set<Pair<Block, Integer>> exclude) {
 		NBTTagCompound structure = new NBTTagCompound();

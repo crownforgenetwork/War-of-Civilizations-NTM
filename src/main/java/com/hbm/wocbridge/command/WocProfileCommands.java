@@ -8,6 +8,7 @@ import com.hbm.wocbridge.content.ContentProfileManager.ValidationRun;
 import com.hbm.wocbridge.content.ProfileValidationIssue;
 import com.hbm.wocbridge.content.ProfileValidationIssue.Severity;
 import com.hbm.wocbridge.content.ProfileValidationResult;
+import com.hbm.wocbridge.enforcement.ContentEnforcementManager;
 
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +27,7 @@ public final class WocProfileCommands {
 				return true;
 			}
 			if("reload".equals(args[1])) {
-				reportValidation(sender, ContentProfileManager.reload(), true);
+				reportValidation(sender, ContentEnforcementManager.reloadProfile(), true);
 				return true;
 			}
 			if("status".equals(args[1])) {

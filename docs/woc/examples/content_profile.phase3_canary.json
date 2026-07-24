@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "profileId": "woc_phase_3_development_canary",
+  "defaultState": "AVAILABLE",
+  "rules": [
+    {
+      "key": "item:hbm:item.ammo_debug#0",
+      "kind": "ITEM",
+      "state": "DISABLED",
+      "notes": "DEVELOPMENT CANARY: debug-only ammunition; tests item use and exact-metadata NEI hiding."
+    },
+    {
+      "key": "block:hbm:tile.event_tester#0",
+      "kind": "BLOCK",
+      "state": "DISABLED",
+      "notes": "DEVELOPMENT CANARY: disposable event-test block; tests server-side placement denial. Existing blocks are untouched."
+    },
+    {
+      "key": "crafting-recipe:hbm:item.template_folder#0:9c90dde52c10e1f0a18e60e068864d91578d039d766e68d55c3169d1fe8bbd57:1",
+      "kind": "CRAFTING_RECIPE",
+      "state": "DISABLED",
+      "notes": "DEVELOPMENT CANARY: one non-core template-folder recipe."
+    },
+    {
+      "key": "smelting-recipe:hbm:item.glyphid_meat_grilled#0:8e71614e6b47f345e2647707e64d597294150339a7d31601cbb14dab4b77e4c5:1",
+      "kind": "SMELTING_RECIPE",
+      "state": "DISABLED",
+      "notes": "DEVELOPMENT CANARY: one optional food smelting mapping."
+    },
+    {
+      "key": "machine-recipe:hbm:item.meteorite_sword_hardened:3745515676a85a9a4893fcf81dcb7f998faa6847117fdc37ae6a08b8c7be41c1:1",
+      "kind": "MACHINE_RECIPE",
+      "state": "DISABLED",
+      "notes": "DEVELOPMENT CANARY: one optional press upgrade recipe, not a core material path."
+    },
+    {
+      "key": "loot:POOL_PILE_OF_GARBAGE:hbm:item.scrap#0:d89099b345a2b0a6144290db0fc08155287c0aa658168bb96b50e96f66dd963b:1",
+      "kind": "STRUCTURE_LOOT",
+      "state": "DISABLED",
+      "notes": "DEVELOPMENT CANARY: removes one common scrap entry from a redundant garbage pool."
+    },
+    {
+      "key": "worldgen:ruinJ",
+      "kind": "WORLDGEN_FEATURE",
+      "state": "DISABLED",
+      "notes": "DEVELOPMENT CANARY: one decorative ruin variant for newly generated chunks; no ore generation is affected."
+    }
+  ],
+  "tags": {
+    "woc:phase3_development_canary": [
+      "item:hbm:item.ammo_debug#0",
+      "block:hbm:tile.event_tester#0",
+      "crafting-recipe:hbm:item.template_folder#0:9c90dde52c10e1f0a18e60e068864d91578d039d766e68d55c3169d1fe8bbd57:1",
+      "smelting-recipe:hbm:item.glyphid_meat_grilled#0:8e71614e6b47f345e2647707e64d597294150339a7d31601cbb14dab4b77e4c5:1",
+      "machine-recipe:hbm:item.meteorite_sword_hardened:3745515676a85a9a4893fcf81dcb7f998faa6847117fdc37ae6a08b8c7be41c1:1",
+      "loot:POOL_PILE_OF_GARBAGE:hbm:item.scrap#0:d89099b345a2b0a6144290db0fc08155287c0aa658168bb96b50e96f66dd963b:1",
+      "worldgen:ruinJ"
+    ]
+  },
+  "notes": "NON-PRODUCTION DEVELOPMENT CANARY. Never installed automatically. Copy manually only into an expendable test instance."
+}
