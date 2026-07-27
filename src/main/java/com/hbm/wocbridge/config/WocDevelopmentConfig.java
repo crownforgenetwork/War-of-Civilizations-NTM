@@ -7,6 +7,7 @@ public final class WocDevelopmentConfig {
 	public static final String CATEGORY = "11_war_of_civilizations";
 
 	public static boolean enableDevelopmentTools = true;
+	public static boolean enableProgressionExport = false;
 	public static boolean strictContentProfileValidation = false;
 	public static boolean writeContentProfileExample = true;
 	public static boolean enableContentEnforcement = false;
@@ -41,6 +42,13 @@ public final class WocDevelopmentConfig {
 				"Enables operator-only WOC development commands such as /wocdev export-content. "
 						+ "Disable this and restart before using the mod on a production server.")
 				.getBoolean(true);
+		enableProgressionExport = config.get(
+				CATEGORY,
+				"enableProgressionExport",
+				false,
+				"Enables the operator-only, read-only /wocdev export-progression "
+						+ "command and its structural fixtures. Disabled by default.")
+				.getBoolean(false);
 		strictContentProfileValidation = config.get(
 				CATEGORY,
 				"strictContentProfileValidation",
